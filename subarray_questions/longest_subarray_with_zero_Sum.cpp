@@ -20,7 +20,7 @@ int subarrayWithZeroSum(vector<int> arr, int n, int d)
       int index = i - map[sum- d];
       maxLen = max(maxLen, i - index);
     }
-    else
+    if(map.find(sum) == map.end())
     {
       map[sum] = i;
     }
