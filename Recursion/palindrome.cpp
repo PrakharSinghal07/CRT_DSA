@@ -5,10 +5,13 @@ bool palindrome(string str, int i, int j){
     return true;
   } // base case
 
-  if(str[i] != str[j]){
-    return false;
-  }
-  return palindrome(str, i+1, j -1);
+  return (str[i] == str[j] && palindrome(str, i+1, j -1));
+
+  //* OR
+  // if(str[i] != str[j]){
+  //   return false;
+  // }
+  // return palindrome(str, i+1, j -1);
 }
 int main(){
   string str = "naman";
