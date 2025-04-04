@@ -47,7 +47,7 @@ void deleteFromBeginning(Node*& head){
 }
 
 void deleteFromEnd(Node*& head){
-  if(head == NULL){
+  if(head == NULL || head -> next == NULL){
     return;
   }
   Node* ptr = head;
@@ -58,7 +58,54 @@ void deleteFromEnd(Node*& head){
   ptr -> next = NULL;
   delete temp;
 }
-                                                                                                                                            
+
+// Node* deleteFromEnd(Node* head){
+//   if(head == NULL || head -> next == NULL){
+//     return head;
+//   }
+//   Node* ptr = head;
+//   while(ptr -> next -> next){
+//     ptr = ptr -> next;
+//   }
+//   Node* temp = ptr -> next;
+//   ptr -> next = NULL;
+//   delete temp;
+//   return head;
+// }
+    
+void deleteAtPos(Node*& head, int pos){
+  if(pos == 1){
+    deleteFromBeginning(head);
+    return;
+  }
+  if(head == NULL){
+    return;
+  }
+  Node* ptr = head;
+  for(int i=1; i<=pos-2; i++){
+    ptr = ptr -> next;
+  }
+  Node* temp = ptr -> next;
+  ptr -> next = ptr -> next -> next;
+  delete temp;
+}
+
+void insertAtPos(Node*& head, int pos, int val){
+  if(pos == 1){
+    insertAtBeginning(head, val);
+    return;
+  }
+  Node* newNode = new Node(val);
+  Node* ptr = head;
+  for(int i=1; i<=pos-2; i++){
+    ptr = ptr -> next;
+    if(ptr == NULL){
+      return;
+    }
+  }
+  newNode -> next = ptr -> next;
+  ptr -> next = newNode;
+}
 int main()                  
 {
   // Node* head = NULL;
@@ -75,6 +122,10 @@ int main()
   deleteFromBeginning(head);
   print(head);
   deleteFromEnd(head);
+  print(head);
+  deleteAtPos(head, 2);
+  print(head);
+  insertAtPos(head, 1, 33);
   print(head);
   return 0;
 }
